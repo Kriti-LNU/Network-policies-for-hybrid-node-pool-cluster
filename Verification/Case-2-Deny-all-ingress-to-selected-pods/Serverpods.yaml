@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: linux-backend-pod
+  namespace: development
+  labels:
+    app: backend
+spec:
+  containers:
+  - name: linux-backend-pod
+    image: mcr.microsoft.com/oss/nginx/nginx:1.15.5-alpine
+    ports:
+    - containerPort: 80
+  nodeSelector:
+    kubernetes.io/os: linux
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: windows-backend-pod
+  namespace: development
+  labels:
+    app: backend
+spec:
+  containers:
+    - name: windows-backend-pod
+      image: mcr.microsoft.com/windows/servercore:ltsc2022
+      args:
+        - powershell.exe
+        - -Command
+        - $listener = New-Object System.Net.HttpListener; $listener.Prefixes.Add('http://*:80/'); $listener.Start();Write-Host('Listening at http://*:80/'); while ($listener.IsListening) { $context = $listener.GetContext(); $response = $context.Response; $content='<html><body><H1>Red Hat OpenShift + Windows Container Workloads</H1></body></html>'; $buffer = [System.Text.Encoding]::UTF8.GetBytes($content); $response.ContentLength64 = $buffer.Length; $response.OutputStream.Write($buffer, 0, $buffer.Length); $response.Close(); };
+      imagePullPolicy: IfNotPresent
+  nodeSelector:
+    kubernetes.io/os: windows
+    kubernetes.azure.com/os-sku: Windows2022

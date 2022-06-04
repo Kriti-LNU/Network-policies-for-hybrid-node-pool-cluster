@@ -1,0 +1,116 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: apiserver
+  name: lin-apiserver-development-testpod
+  namespace: development
+spec:
+  containers:
+  - args:
+    - /bin/sh
+    - -c
+    - sleep 360000
+    image: busybox:1.28
+    imagePullPolicy: Always
+    name: lin-apiserver-development-testpod
+  nodeSelector:
+    kubernetes.io/os: linux
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: win-apiserver-development-testpod
+  namespace: development
+  labels:
+    app: apiserver
+spec:
+  containers:
+    - name: win-apiserver-development-testpod
+      image: mcr.microsoft.com/windows/servercore:ltsc2022
+      args:
+        - powershell.exe
+        - -Command
+        - "Start-Sleep 360000"
+      imagePullPolicy: IfNotPresent
+  nodeSelector:
+    kubernetes.io/os: windows
+    kubernetes.azure.com/os-sku: Windows2022
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: frontend
+  name: lin-frontend-default-testpod
+  namespace: default
+spec:
+  containers:
+  - args:
+    - /bin/sh
+    - -c
+    - sleep 360000
+    image: busybox:1.28
+    imagePullPolicy: Always
+    name: lin-frontend-default-testpod
+  nodeSelector:
+    kubernetes.io/os: linux
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: win-frontend-default-testpod
+  namespace: default
+  labels:
+    app: frontend
+spec:
+  containers:
+    - name: win-frontend-default-testpod
+      image: mcr.microsoft.com/windows/servercore:ltsc2022
+      args:
+        - powershell.exe
+        - -Command
+        - "Start-Sleep 360000"
+      imagePullPolicy: IfNotPresent
+  nodeSelector:
+    kubernetes.io/os: windows
+    kubernetes.azure.com/os-sku: Windows2022
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: webserver
+  name: lin-webserver-development-testpod
+  namespace: development
+spec:
+  containers:
+  - args:
+    - /bin/sh
+    - -c
+    - sleep 360000
+    image: busybox:1.28
+    imagePullPolicy: Always
+    name: lin-webserver-development-testpod
+  nodeSelector:
+    kubernetes.io/os: linux
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: win-webserver-development-testpod
+  namespace: development
+  labels:
+    app: webserver
+spec:
+  containers:
+    - name: win-webserver-development-testpod
+      image: mcr.microsoft.com/windows/servercore:ltsc2022
+      args:
+        - powershell.exe
+        - -Command
+        - "Start-Sleep 360000"
+      imagePullPolicy: IfNotPresent
+  nodeSelector:
+    kubernetes.io/os: windows
+    kubernetes.azure.com/os-sku: Windows2022
