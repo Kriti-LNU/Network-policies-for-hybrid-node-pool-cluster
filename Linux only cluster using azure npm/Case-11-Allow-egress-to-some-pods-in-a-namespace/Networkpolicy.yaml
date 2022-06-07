@@ -1,0 +1,19 @@
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: limit-egress-to-pods-in-a-namespace
+  namespace: development
+spec:
+  policyTypes:
+    - Egress
+  podSelector:
+    matchLabels:
+      app: frontend
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              purpose: default
+          podSelector:
+            matchLabels:
+              app: backend

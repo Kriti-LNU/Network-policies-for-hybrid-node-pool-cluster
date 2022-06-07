@@ -1,0 +1,19 @@
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: limit-ingress-from-namespace
+  namespace: development
+spec:
+  policyTypes:
+    - Ingress
+  podSelector:
+    matchLabels:
+      app: backend
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              purpose: default
+          podSelector:
+            matchLabels:
+              app: apiserver

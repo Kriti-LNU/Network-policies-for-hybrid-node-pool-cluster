@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: linux-backend-pod
+  namespace: development
+  labels:
+    app: backend
+spec:
+  containers:
+    - name: backend
+      image: mcr.microsoft.com/oss/nginx/nginx:1.15.5-alpine
+      ports:
+        - containerPort: 80
+  nodeSelector:
+    kubernetes.io/os: linux

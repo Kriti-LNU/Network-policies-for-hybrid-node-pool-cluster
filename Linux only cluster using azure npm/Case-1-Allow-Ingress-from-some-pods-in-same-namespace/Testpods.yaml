@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: frontend
+  name: lin-frontend-testpod
+  namespace: development
+spec:
+  containers:
+    - args:
+        - /bin/sh
+        - -c
+        - sleep 360000
+      image: busybox:1.28
+      imagePullPolicy: Always
+      name: lin-frontend-testpod
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: apiserver
+  name: lin-apiserver-testpod
+  namespace: development
+spec:
+  containers:
+    - args:
+        - /bin/sh
+        - -c
+        - sleep 360000
+      image: busybox:1.28
+      imagePullPolicy: Always
+      name: lin-apiserver-testpod
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: frontend
+  name: lin-frontend-default-testpod
+  namespace: default
+spec:
+  containers:
+    - args:
+        - /bin/sh
+        - -c
+        - sleep 360000
+      image: busybox:1.28
+      imagePullPolicy: Always
+      name: lin-frontend-testpod
