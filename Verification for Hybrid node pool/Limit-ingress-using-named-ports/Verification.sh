@@ -1,5 +1,5 @@
 # Create pods and service 
-kubectl apply -f "C:\github\Network-policies-for-hybrid-node-pool-cluster\Verification\Limit-ingress-using-named-ports\Pods-and-service.yaml"
+kubectl apply -f "C:\github\Network-policies-for-hybrid-node-pool-cluster\Verification for Hybrid node pool\Limit-ingress-using-named-ports\Pods-and-service.yaml"
 
 # Test before applying the NP
 ## From linux based testpod 

@@ -15,7 +15,10 @@ myWindowsUserName="Kriti_lnu" # Recommend azureuser
 myWindowsPassword="Y*xiny349fd10H438nSotT" # Complex enough
 myK8sVersion="1.23.3" # AKS supports WS2022 when k8s version >= 1.23
 
+# Create resource group 
 az group create --name $myResourceGroup --location $myLocation
+
+# Create AKS cluster 
 az aks create \
     --resource-group $myResourceGroup \
     --name $myAKSCluster \
@@ -29,6 +32,8 @@ az aks create \
 
 # Set variables for Windows 2022 node pool
 myWindowsNodePool="win22" # Length <= 6
+
+# Add Windows node pool
 az aks nodepool add \
     --resource-group $myResourceGroup \
     --cluster-name $myAKSCluster \
@@ -37,14 +42,17 @@ az aks nodepool add \
     --os-sku Windows2022 \
     --node-count 1
 
-## Linux node pool
+# Optional- If you want to add additional Linux node pool
 az aks nodepool add \
     --resource-group $myResourceGroup\
     --cluster-name $myAKSCluster \
     --name linuxpool \
     --node-count 1
 
+# Connect to the cluster 
 az aks get-credentials -g $myResourceGroup -n $myAKSCluster --overwrite-existing
+
+
 kubectl apply -f "C:\Users\t-kritilnu\OneDrive - Microsoft\Desktop\Network policies for hybrid cluster\Setup files for Hybrid cluster\azure-npm-linux.yaml"
 kubectl apply -f "C:\Users\t-kritilnu\OneDrive - Microsoft\Desktop\Network policies for hybrid cluster\Setup files for Hybrid cluster\azure-npm-windows.yaml"
 

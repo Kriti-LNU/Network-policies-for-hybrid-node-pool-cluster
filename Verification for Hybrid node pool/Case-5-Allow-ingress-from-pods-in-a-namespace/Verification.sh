@@ -8,6 +8,7 @@ kubectl get pods --show-labels
 
 # Apply Network policy file
 kubectl apply -f "C:\github\Network-policies-for-hybrid-node-pool-cluster\Verification for Hybrid node pool\Case-5-Allow-ingress-from-pods-in-a-namespace\Networkpolicy.yaml"
+
 ## After applying NP
 # Not reachable
 kubectl exec --namespace development lin-apiserver-development-testpod -- nc -vz $(kubectl get pod linux-backend-pod --namespace development -o 'jsonpath={.status.podIP}') 80

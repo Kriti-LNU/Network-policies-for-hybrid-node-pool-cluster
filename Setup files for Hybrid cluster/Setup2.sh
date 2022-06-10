@@ -7,9 +7,9 @@ az feature register --namespace Microsoft.ContainerService --name AKSWindows2022
 az provider register -n Microsoft.ContainerService
 
 # Set variables
-myLocation="westus" # Depends on you
-myResourceGroup="Kriti_Cluster" # Depends on you
-myAKSCluster="AKSCluster" # Depends on you
+myLocation="eastus" # Depends on you
+myResourceGroup="Kriti-Hybrid-AKS-RG" # Depends on you
+myAKSCluster="LinWin" # Depends on you
 mySSHKeyFilePath="kriti-ssh-key.pub"
 myWindowsUserName="Kriti_lnu" # Recommend azureuser
 myWindowsPassword="Y*xiny349fd10H438nSotT" # Complex enough
@@ -61,7 +61,7 @@ az aks nodepool add \
     --node-count 1
 
 az aks get-credentials -g $myResourceGroup -n $myAKSCluster --overwrite-existing
-kubectl apply -f "C:\github\Network-policies-for-hybrid-node-pool-cluster\Setup files\azure-npm-linux.yaml"
-kubectl apply -f "C:\github\Network-policies-for-hybrid-node-pool-cluster\Setup files\azure-npm-windows.yaml"
+kubectl apply -f "C:\github\Network-policies-for-hybrid-node-pool-cluster\Setup files for Hybrid cluster\azure-npm-linux.yaml"
+kubectl apply -f "C:\github\Network-policies-for-hybrid-node-pool-cluster\Setup files for Hybrid cluster\azure-npm-windows.yaml"
 
 
