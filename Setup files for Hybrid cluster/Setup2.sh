@@ -8,8 +8,8 @@ az provider register -n Microsoft.ContainerService
 
 # Set variables
 myLocation="eastus" # Depends on you
-myResourceGroup="Kriti-Hybrid-AKS-RG" # Depends on you
-myAKSCluster="LinWin" # Depends on you
+myResourceGroup="Kriti-Hybrid-AKS-Cluster" # Depends on you
+myAKSCluster="AKSLinWin" # Depends on you
 mySSHKeyFilePath="kriti-ssh-key.pub"
 myWindowsUserName="Kriti_lnu" # Recommend azureuser
 myWindowsPassword="Y*xiny349fd10H438nSotT" # Complex enough

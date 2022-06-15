@@ -3,30 +3,30 @@ kind: Pod
 metadata:
   labels:
     app: frontend
-  name: lin-frontend-testpod
+  name: lin-frontend-development-testpod
   namespace: development
 spec:
   containers:
-  - args:
-    - /bin/sh
-    - -c
-    - sleep 360000
-    image: busybox:1.28
-    imagePullPolicy: Always
-    name: lin-frontend-testpod
+    - args:
+        - /bin/sh
+        - -c
+        - sleep 360000
+      image: busybox:1.28
+      imagePullPolicy: Always
+      name: lin-frontend-development-testpod
   nodeSelector:
     kubernetes.io/os: linux
 ---
 apiVersion: v1
 kind: Pod
 metadata:
-  name: win-frontend-testpod
+  name: win-frontend-development-testpod
   namespace: development
   labels:
     app: frontend
 spec:
   containers:
-    - name: win-frontend-testpod
+    - name: win-frontend-development-testpod
       image: mcr.microsoft.com/windows/servercore:ltsc2022
       args:
         - powershell.exe
@@ -42,30 +42,30 @@ kind: Pod
 metadata:
   labels:
     app: database
-  name: lin-database-testpod
-  namespace: default
+  name: lin-database-development-testpod
+  namespace: development
 spec:
   containers:
-  - args:
-    - /bin/sh
-    - -c
-    - sleep 360000
-    image: busybox:1.28
-    imagePullPolicy: Always
-    name: lin-database-testpod
+    - args:
+        - /bin/sh
+        - -c
+        - sleep 360000
+      image: busybox:1.28
+      imagePullPolicy: Always
+      name: lin-database-development-testpod
   nodeSelector:
     kubernetes.io/os: linux
 ---
 apiVersion: v1
 kind: Pod
 metadata:
-  name: win-database-testpod
-  namespace: default
+  name: win-database-development-testpod
+  namespace: development
   labels:
     app: database
 spec:
   containers:
-    - name: win-database-testpod
+    - name: win-database-development-testpod
       image: mcr.microsoft.com/windows/servercore:ltsc2022
       args:
         - powershell.exe

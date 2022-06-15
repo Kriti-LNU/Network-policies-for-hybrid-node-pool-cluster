@@ -1,0 +1,102 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: windows-pod-port-5678
+  namespace: development
+  labels:
+    app: backend
+spec:
+  containers:
+    - name: windows-pod-port-5678
+      image: mcr.microsoft.com/windows/servercore:ltsc2022
+      args:
+        - powershell.exe
+        - -Command
+        - $listener = New-Object System.Net.HttpListener; $listener.Prefixes.Add('http://*:5678/'); $listener.Start();Write-Host('Listening at http://*:8080/'); while ($listener.IsListening) { $context = $listener.GetContext(); $response = $context.Response; $content='<html><body><H1>Red Hat OpenShift + Windows Container Workloads</H1></body></html>'; $buffer = [System.Text.Encoding]::UTF8.GetBytes($content); $response.ContentLength64 = $buffer.Length; $response.OutputStream.Write($buffer, 0, $buffer.Length); $response.Close(); };
+      imagePullPolicy: IfNotPresent
+  nodeSelector:
+    kubernetes.io/os: windows
+    kubernetes.azure.com/os-sku: Windows2022
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: windows-pod-port-80
+  namespace: development
+  labels:
+    app: backend
+spec:
+  containers:
+    - name: windows-pod-port-80
+      image: mcr.microsoft.com/windows/servercore:ltsc2022
+      args:
+        - powershell.exe
+        - -Command
+        - $listener = New-Object System.Net.HttpListener; $listener.Prefixes.Add('http://*:80/'); $listener.Start();Write-Host('Listening at http://*:80/'); while ($listener.IsListening) { $context = $listener.GetContext(); $response = $context.Response; $content='<html><body><H1>Red Hat OpenShift + Windows Container Workloads</H1></body></html>'; $buffer = [System.Text.Encoding]::UTF8.GetBytes($content); $response.ContentLength64 = $buffer.Length; $response.OutputStream.Write($buffer, 0, $buffer.Length); $response.Close(); };
+      imagePullPolicy: IfNotPresent
+  nodeSelector:
+    kubernetes.io/os: windows
+    kubernetes.azure.com/os-sku: Windows2022
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: windows-pod-port-6782
+  namespace: development
+  labels:
+    app: backend
+spec:
+  containers:
+    - name: windows-pod-port-6782
+      image: mcr.microsoft.com/windows/servercore:ltsc2022
+      args:
+        - powershell.exe
+        - -Command
+        - $listener = New-Object System.Net.HttpListener; $listener.Prefixes.Add('http://*:6782/'); $listener.Start();Write-Host('Listening at http://*:6782/'); while ($listener.IsListening) { $context = $listener.GetContext(); $response = $context.Response; $content='<html><body><H1>Red Hat OpenShift + Windows Container Workloads</H1></body></html>'; $buffer = [System.Text.Encoding]::UTF8.GetBytes($content); $response.ContentLength64 = $buffer.Length; $response.OutputStream.Write($buffer, 0, $buffer.Length); $response.Close(); };
+      imagePullPolicy: IfNotPresent
+  nodeSelector:
+    kubernetes.io/os: windows
+    kubernetes.azure.com/os-sku: Windows2022
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: linux-pod-port-8080
+  namespace: development
+  labels:
+    app: backend
+spec:
+  containers:
+    - name: linux-pod-port-8080
+      image: k8s.gcr.io/echoserver:1.4
+      ports:
+        - containerPort: 8080
+  nodeSelector:
+    kubernetes.io/os: linux
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: linux-pod-port-6739
+  namespace: development
+  labels:
+    app: backend
+spec:
+  nodeSelector:
+    "kubernetes.io/os": linux
+  containers:
+    - name: linux-pod-port-6739
+      image: mcr.microsoft.com/oss/bitnami/redis:6.0.8
+      env:
+        - name: ALLOW_EMPTY_PASSWORD
+          value: "yes"
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+        limits:
+          cpu: 250m
+          memory: 256Mi
+      ports:
+        - containerPort: 6379
+          name: redis

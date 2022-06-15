@@ -2,8 +2,8 @@ apiVersion: v1
 kind: Pod
 metadata:
   labels:
-    app: apiserver
-  name: lin-apiserver-development-testpod
+    app: database
+  name: lin-database-development-testpod
   namespace: development
 spec:
   containers:
@@ -13,20 +13,20 @@ spec:
     - sleep 360000
     image: busybox:1.28
     imagePullPolicy: Always
-    name: lin-apiserver-development-testpod
+    name: lin-database-development-testpod
   nodeSelector:
     kubernetes.io/os: linux
 ---
 apiVersion: v1
 kind: Pod
 metadata:
-  name: win-apiserver-development-testpod
+  name: win-database-development-testpod
   namespace: development
   labels:
-    app: apiserver
+    app: database
 spec:
   containers:
-    - name: win-apiserver-development-testpod
+    - name: win-database-development-testpod
       image: mcr.microsoft.com/windows/servercore:ltsc2022
       args:
         - powershell.exe
@@ -41,8 +41,8 @@ apiVersion: v1
 kind: Pod
 metadata:
   labels:
-    app: apiserver
-  name: lin-apiserver-default-testpod
+    app: database
+  name: lin-database-default-testpod
   namespace: default
 spec:
   containers:
@@ -52,20 +52,20 @@ spec:
     - sleep 360000
     image: busybox:1.28
     imagePullPolicy: Always
-    name: lin-apiserver-default-testpod
+    name: lin-database-default-testpod
   nodeSelector:
     kubernetes.io/os: linux
 ---
 apiVersion: v1
 kind: Pod
 metadata:
-  name: win-apiserver-default-testpod
+  name: win-database-default-testpod
   namespace: default
   labels:
-    app: apiserver
+    app: database
 spec:
   containers:
-    - name: win-apiserver-default-testpod
+    - name: win-database-default-testpod
       image: mcr.microsoft.com/windows/servercore:ltsc2022
       args:
         - powershell.exe

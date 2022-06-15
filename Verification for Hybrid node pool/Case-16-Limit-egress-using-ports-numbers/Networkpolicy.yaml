@@ -1,20 +1,20 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: allow-from-cidr
+  name: allow-to-port
   namespace: development
 spec:
   podSelector:
     matchLabels:
-      app: frontend
+      app: curl
   policyTypes:
     - Egress
   egress:
     - to:
-        - ipBlock:
-            cidr: 172.217.160.228/32
+        - podSelector:
+            matchLabels:
+              app: backend
       ports:
-        - port: 53
-          protocol: UDP
-        - port: 53
-          protocol: TCP
+        - protocol: TCP
+          port: 80
+    

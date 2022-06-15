@@ -13,10 +13,10 @@ kubectl exec -n development lin-frontend-testpod -- nc -vz $(kubectl get pod win
 kubectl exec -n development win-frontend-testpod  -- powershell Invoke-WebRequest -Uri http://$(kubectl get po linux-backend-pod -n development -o 'jsonpath={.status.podIP}'):80 -UseBasicParsing 
 kubectl exec -n development win-frontend-testpod  -- powershell Invoke-WebRequest -Uri http://$(kubectl get po windows-backend-pod -n development -o 'jsonpath={.status.podIP}'):80 -UseBasicParsing
 
-kubectl exec -n development lin-frontend-testpod -- nc -vz $(kubectl get pod linux-webserver-pod -o 'jsonpath={.status.podIP}') 80
-kubectl exec -n development lin-frontend-testpod -- nc -vz $(kubectl get pod windows-webserver-pod -o 'jsonpath={.status.podIP}') 80
-kubectl exec -n development win-frontend-testpod  -- powershell Invoke-WebRequest -Uri http://$(kubectl get po linux-webserver-pod -o 'jsonpath={.status.podIP}'):80 -UseBasicParsing
-kubectl exec -n development win-frontend-testpod  -- powershell Invoke-WebRequest -Uri http://$(kubectl get po windows-webserver-pod -o 'jsonpath={.status.podIP}'):80 -UseBasicParsing
+kubectl exec -n development lin-frontend-testpod -- nc -vz $(kubectl get pod linux-database-pod -o 'jsonpath={.status.podIP}') 80
+kubectl exec -n development lin-frontend-testpod -- nc -vz $(kubectl get pod windows-database-pod -o 'jsonpath={.status.podIP}') 80
+kubectl exec -n development win-frontend-testpod  -- powershell Invoke-WebRequest -Uri http://$(kubectl get po linux-database-pod -o 'jsonpath={.status.podIP}'):80 -UseBasicParsing
+kubectl exec -n development win-frontend-testpod  -- powershell Invoke-WebRequest -Uri http://$(kubectl get po windows-database-pod -o 'jsonpath={.status.podIP}'):80 -UseBasicParsing
 
 # Should be allowed
 kubectl exec -n development lin-frontend-testpod -- nc -vz $(kubectl get pod linux-default-backend-pod -o 'jsonpath={.status.podIP}') 80
@@ -27,8 +27,8 @@ kubectl exec -n development win-frontend-testpod  -- powershell Invoke-WebReques
 # Clean up
 kubectl delete pod lin-frontend-testpod -n development
 kubectl delete pod win-frontend-testpod -n development
-kubectl delete pod linux-webserver-pod 
-kubectl delete pod windows-webserver-pod
+kubectl delete pod linux-database-pod 
+kubectl delete pod windows-database-pod
 kubectl delete pod linux-backend-pod -n development
 kubectl delete pod windows-backend-pod -n development
 kubectl delete pod linux-default-backend-pod

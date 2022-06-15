@@ -41,8 +41,8 @@ apiVersion: v1
 kind: Pod
 metadata:
   labels:
-    app: apiserver
-  name: lin-apiserver-testpod
+    app: database
+  name: lin-database-testpod
   namespace: default
 spec:
   containers:
@@ -52,20 +52,20 @@ spec:
     - sleep 360000
     image: busybox:1.28
     imagePullPolicy: Always
-    name: lin-apiserver-testpod
+    name: lin-database-testpod
   nodeSelector:
     kubernetes.io/os: linux
 ---
 apiVersion: v1
 kind: Pod
 metadata:
-  name: win-apiserver-testpod
+  name: win-database-testpod
   namespace: default
   labels:
-    app: apiserver
+    app: database
 spec:
   containers:
-    - name: win-apiserver-testpod
+    - name: win-database-testpod
       image: mcr.microsoft.com/windows/servercore:ltsc2022
       args:
         - powershell.exe

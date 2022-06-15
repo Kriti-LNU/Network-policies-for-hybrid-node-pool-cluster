@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: win-curl-testpod
+  namespace: development
+  labels:
+    app: curl
+spec:
+  containers:
+    - name: win-curl-testpod
+      image: mcr.microsoft.com/windows/servercore:ltsc2022
+      args:
+        - powershell.exe
+        - -Command
+        - "Start-Sleep 360000"
+      imagePullPolicy: IfNotPresent
+  nodeSelector:
+    kubernetes.io/os: windows
+    kubernetes.azure.com/os-sku: Windows2022

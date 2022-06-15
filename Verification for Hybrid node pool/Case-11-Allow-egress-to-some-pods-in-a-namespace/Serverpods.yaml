@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: linux-webserver-pod
+  name: linux-database-pod
   namespace: default
   labels:
-    app: webserver
+    app: database
 spec:
   containers:
-  - name: linux-webserver-pod
+  - name: linux-database-pod
     image: mcr.microsoft.com/oss/nginx/nginx:1.15.5-alpine
     ports:
     - containerPort: 80
@@ -17,13 +17,13 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: windows-webserver-pod
+  name: windows-database-pod
   namespace: default
   labels:
-    app: webserver
+    app: database
 spec:
   containers:
-    - name: windows-webserver-pod
+    - name: windows-database-pod
       image: mcr.microsoft.com/windows/servercore:ltsc2022
       args:
         - powershell.exe

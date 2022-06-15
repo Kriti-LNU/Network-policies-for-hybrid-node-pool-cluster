@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   labels:
     app: frontend
-  name: lin-frontend-testpod
+  name: lin-frontend-development-testpod
   namespace: development
 spec:
   containers:
@@ -13,20 +13,20 @@ spec:
         - sleep 360000
       image: busybox:1.28
       imagePullPolicy: Always
-      name: lin-frontend-testpod
+      name: lin-frontend-development-testpod
   nodeSelector:
     kubernetes.io/os: linux
 ---
 apiVersion: v1
 kind: Pod
 metadata:
-  name: win-frontend-testpod
+  name: win-frontend-development-testpod
   namespace: development
   labels:
     app: frontend
 spec:
   containers:
-    - name: win-frontend-testpod
+    - name: win-frontend-development-testpod
       image: mcr.microsoft.com/windows/servercore:ltsc2022
       args:
         - powershell.exe
@@ -41,8 +41,8 @@ apiVersion: v1
 kind: Pod
 metadata:
   labels:
-    app: apiserver
-  name: lin-apiserver-testpod
+    app: database
+  name: lin-database-development-testpod
   namespace: development
 spec:
   containers:
@@ -52,20 +52,20 @@ spec:
         - sleep 360000
       image: busybox:1.28
       imagePullPolicy: Always
-      name: lin-apiserver-testpod
+      name: lin-database-development-testpod
   nodeSelector:
     kubernetes.io/os: linux
 ---
 apiVersion: v1
 kind: Pod
 metadata:
-  name: win-apiserver-testpod
+  name: win-database-development-testpod
   namespace: development
   labels:
-    app: apiserver
+    app: database
 spec:
   containers:
-    - name: win-apiserver-testpod
+    - name: win-database-development-testpod
       image: mcr.microsoft.com/windows/servercore:ltsc2022
       args:
         - powershell.exe
@@ -91,7 +91,7 @@ spec:
         - sleep 360000
       image: busybox:1.28
       imagePullPolicy: Always
-      name: lin-frontend-testpod
+      name: lin-frontend-default-testpod
   nodeSelector:
     kubernetes.io/os: linux
 ---
@@ -104,7 +104,7 @@ metadata:
     app: frontend
 spec:
   containers:
-    - name: win-frontend-testpod
+    - name: win-frontend-default-testpod
       image: mcr.microsoft.com/windows/servercore:ltsc2022
       args:
         - powershell.exe
