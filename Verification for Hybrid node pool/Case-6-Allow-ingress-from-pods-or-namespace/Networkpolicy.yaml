@@ -16,4 +16,4 @@ spec:
               purpose: default
         - podSelector:
             matchLabels:
-              app: apiserver
+              app: testapp

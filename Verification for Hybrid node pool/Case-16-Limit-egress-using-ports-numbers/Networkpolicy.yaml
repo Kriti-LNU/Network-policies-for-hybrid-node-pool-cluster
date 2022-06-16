@@ -6,7 +6,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      app: curl
+      app: frontend
   policyTypes:
     - Egress
   egress:

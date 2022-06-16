@@ -2,8 +2,8 @@ apiVersion: v1
 kind: Pod
 metadata:
   labels:
-    app: curl
-  name: lin-curl-testpod
+    app: frontend
+  name: lin-frontend-testpod
   namespace: development
 spec:
   containers:
@@ -13,20 +13,20 @@ spec:
         - sleep 360000
       image: busybox:1.28
       imagePullPolicy: Always
-      name: lin-curl-testpod
+      name: lin-frontend-testpod
   nodeSelector:
     kubernetes.io/os: linux
 ---
 apiVersion: v1
 kind: Pod
 metadata:
-  name: win-curl-testpod
+  name: win-frontend-testpod
   namespace: development
   labels:
-    app: curl
+    app: frontend
 spec:
   containers:
-    - name: win-curl-testpod
+    - name: win-frontend-testpod
       image: mcr.microsoft.com/windows/servercore:ltsc2022
       args:
         - powershell.exe
