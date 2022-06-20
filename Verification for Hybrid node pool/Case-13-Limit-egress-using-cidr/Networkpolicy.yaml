@@ -12,7 +12,7 @@ spec:
   egress:
     - to:
         - ipBlock:
-            cidr: 172.217.160.228/32
+            cidr: 216.58.221.36/32
       ports:
         - port: 53
           protocol: UDP

@@ -3,7 +3,7 @@
 kubectl apply -f "C:\github\Network-policies-for-hybrid-node-pool-cluster\Verification for Hybrid node pool\Case-13-Limit-egress-using-cidr\Testpods.yaml"
 
 # Before applying the NP file test connectivity
-kubectl exec -n development win-frontend-testpod  -- powershell Invoke-WebRequest -Uri http://172.217.160.228 -UseBasicParsing
+kubectl exec -n development win-frontend-testpod  -- powershell Invoke-WebRequest -Uri http://216.58.221.36 -UseBasicParsing
 kubectl exec -n development win-frontend-testpod  -- powershell Invoke-WebRequest -Uri http://www.yahoo.com -UseBasicParsing
 
 # From linux based pod

@@ -35,4 +35,4 @@ kubectl delete pod lin-frontend-development-testpod -n development
 kubectl delete pod win-frontend-development-testpod -n development
 kubectl delete pod win-frontend-default-testpod
 kubectl delete pod lin-frontend-default-testpod 
-kubectl delete netpol limit-ingress-using-podselector -n development
+kubectl delete netpol limit-ingress -n development

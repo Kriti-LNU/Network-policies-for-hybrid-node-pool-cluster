@@ -1,6 +1,6 @@
 
 # Create pods 
-kubectl apply -f "C:\github\Network-policies-for-hybrid-node-pool-cluster\Verification for Hybrid node pool\Case-13-Limit-egress-using-private-ip\Pods-and-service.yaml"
+kubectl apply -f "C:\github\Network-policies-for-hybrid-node-pool-cluster\Verification for Hybrid node pool\Case-14-Limit-egress-using-private-ip\Testpods.yaml"
 
 # Test  before applying the NP
 # From windows based pod
@@ -12,7 +12,7 @@ kubectl exec -n development lin-frontend-testpod -- nc -vz $(kubectl get pod win
 
 # Add ip address of one of the pods - linux-pod or windows-pod to the network policy file and test connectivity
 # Apply NP file
-kubectl apply -f "C:\github\Network-policies-for-hybrid-node-pool-cluster\Verification for Hybrid node pool\Case-13-Limit-egress-using-private-ip\Networkpolicy.yaml"
+kubectl apply -f "C:\github\Network-policies-for-hybrid-node-pool-cluster\Verification for Hybrid node pool\Case-14-Limit-egress-using-private-ip\Networkpolicy.yaml"
 
 # Test after applying the NP
 # From windows based pod

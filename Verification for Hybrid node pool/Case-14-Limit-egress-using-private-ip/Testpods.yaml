@@ -26,7 +26,7 @@ metadata:
   name: linux-pod
   namespace: development
   labels:
-    app: webserver
+    app: backend
 spec:
   containers:
     - name: linux-pod

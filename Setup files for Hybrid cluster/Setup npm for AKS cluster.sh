@@ -8,50 +8,32 @@ az provider register -n Microsoft.ContainerService
 
 # Set variables
 myLocation="eastus" # Depends on you
-myResourceGroup="Kriti-Hybrid-AKS-Cluster" # Depends on you
-myAKSCluster="AKSLinWin" # Depends on you
+myResourceGroup="Kriti_Test_hybrid_node_pool" # Depends on you
+myAKSCluster="HybridCluster" # Depends on you
 mySSHKeyFilePath="kriti-ssh-key.pub"
 myWindowsUserName="Kriti_lnu" # Recommend azureuser
 myWindowsPassword="Y*xiny349fd10H438nSotT" # Complex enough
 myK8sVersion="1.23.3" # AKS supports WS2022 when k8s version >= 1.23
 
-# Create a resource group
+# Create resource group 
 az group create --name $myResourceGroup --location $myLocation
 
-# Create a virtual network and subnet
-az network vnet create \
-    --resource-group $myResourceGroup \
-    --name Vnet \
-    --address-prefixes 10.0.0.0/8 \
-    --subnet-name AKSSubnet \
-    --subnet-prefix 10.240.0.0/16
-
-# Get the subnet resource ID for the existing subnet into which the AKS cluster will be joined:
-SUBNET_ID=$(az network vnet subnet list \
-     --resource-group $myResourceGroup \
-    --vnet-name Vnet \
-    --query "[0].id" --output tsv)
-
-DNS_SERVICE_IP="10.0.10.10"
-SERVICE_CIDR="10.0.10.0/24"
-
+# Create AKS cluster 
 az aks create \
     --resource-group $myResourceGroup \
     --name $myAKSCluster \
-    --node-count 1 \
-    --generate-ssh-keys \
-    --dns-service-ip ${DNS_SERVICE_IP} \
-    --service-cidr ${SERVICE_CIDR} \
-    --docker-bridge-address 172.17.0.1/16 \
-    --vnet-subnet-id $SUBNET_ID \
+    --generate-ssh-keys  \
     --windows-admin-username $myWindowsUserName \
     --windows-admin-password $myWindowsPassword \
     --kubernetes-version $myK8sVersion \
+    --network-plugin azure \
     --vm-set-type VirtualMachineScaleSets \
-    --network-plugin azure 
+    --node-count 1
 
 # Set variables for Windows 2022 node pool
 myWindowsNodePool="win22" # Length <= 6
+
+# Add Windows node pool
 az aks nodepool add \
     --resource-group $myResourceGroup \
     --cluster-name $myAKSCluster \
@@ -60,8 +42,18 @@ az aks nodepool add \
     --os-sku Windows2022 \
     --node-count 1
 
+# Optional- If you want to add additional Linux node pool
+az aks nodepool add \
+    --resource-group $myResourceGroup\
+    --cluster-name $myAKSCluster \
+    --name linuxpool \
+    --node-count 1
+
+# Connect to the cluster 
 az aks get-credentials -g $myResourceGroup -n $myAKSCluster --overwrite-existing
-kubectl apply -f "C:\github\Network-policies-for-hybrid-node-pool-cluster\Setup files for Hybrid cluster\azure-npm-linux.yaml"
-kubectl apply -f "C:\github\Network-policies-for-hybrid-node-pool-cluster\Setup files for Hybrid cluster\azure-npm-windows.yaml"
+
+kubectl apply -f "C:\Users\t-kritilnu\OneDrive - Microsoft\Desktop\Network policies for hybrid cluster\Setup files for Hybrid cluster\azure-npm-linux.yaml"
+kubectl apply -f "C:\Users\t-kritilnu\OneDrive - Microsoft\Desktop\Network policies for hybrid cluster\Setup files for Hybrid cluster\azure-npm-windows.yaml"
+
 
 
